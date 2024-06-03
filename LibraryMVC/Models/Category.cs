@@ -6,26 +6,7 @@ using System.Linq;
 
 namespace LibraryMVC.Models
 {
-    public class Category : DbContext
-    {
-        // Your context has been configured to use a 'Category' connection string from your application's 
-        // configuration file (App.config or Web.config). By default, this connection string targets the 
-        // 'LibraryMVC.Models.Category' database on your LocalDb instance. 
-        // 
-        // If you wish to target a different database and/or database provider, modify the 'Category' 
-        // connection string in the application configuration file.
-        public Category()
-            : base("name=Category")
-        {
-        }
-
-        // Add a DbSet for each entity type that you want to include in your model. For more information 
-        // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
-
-        public virtual DbSet<Categories> Categories { get; set; }
-    }
-
-    public class Categories
+    public class Category
     {
         [Key]
         public int CategoryId { get; set; }
@@ -39,5 +20,7 @@ namespace LibraryMVC.Models
         [Required]
         [DisplayName("Status")]
         public int Status { get; set; } = 1;
+
+        public string StatusText => Status == 1 ? "Active" : "Inactive";
     }
 }

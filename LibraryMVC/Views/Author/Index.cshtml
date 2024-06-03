@@ -1,0 +1,33 @@
+﻿@model IEnumerable<LibraryMVC.Models.Author>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Authors List</h2>
+
+<button type="button" onclick="location.href='@Url.Action("Create")'" class="btn btn-success my-3">Create New</button>
+
+<table class="table border">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <button type="button" onclick="location.href='@Url.Action("Edit", new { id=item.AuthorId })'" class="btn btn-primary">Edit</button>
+                @*<button type="button" onclick="location.href='@Url.Action("Details", new { id=item.CategoryId})'" class="btn btn-info">Details</button>*@
+                <button type="button" onclick="location.href='@Url.Action("Delete", new { id=item.AuthorId })'" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+    }
+
+</table>

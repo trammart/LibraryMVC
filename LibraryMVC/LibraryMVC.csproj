@@ -171,18 +171,46 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuthorController.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PublishersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406030222274_InitialCreate.cs" />
+    <Compile Include="Migrations\202406030222274_InitialCreate.designer.cs">
+      <DependentUpon>202406030222274_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406030358451_InitialCreate1.cs" />
+    <Compile Include="Migrations\202406030358451_InitialCreate1.designer.cs">
+      <DependentUpon>202406030358451_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406030554209_ModifiedBooks.cs" />
+    <Compile Include="Migrations\202406030554209_ModifiedBooks.designer.cs">
+      <DependentUpon>202406030554209_ModifiedBooks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406030601207_ModifiedBooks_Virtual.cs" />
+    <Compile Include="Migrations\202406030601207_ModifiedBooks_Virtual.designer.cs">
+      <DependentUpon>202406030601207_ModifiedBooks_Virtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406030822464_Modified_Application_User.cs" />
+    <Compile Include="Migrations\202406030822464_Modified_Application_User.designer.cs">
+      <DependentUpon>202406030822464_Modified_Application_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Lang.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Publisher.cs" />
+    <Compile Include="Models\RegisterUserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -257,6 +285,32 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Author\Create.cshtml" />
+    <Content Include="Views\Author\Delete.cshtml" />
+    <Content Include="Views\Author\Details.cshtml" />
+    <Content Include="Views\Author\Edit.cshtml" />
+    <Content Include="Views\Author\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Publishers\Create.cshtml" />
+    <Content Include="Views\Publishers\Delete.cshtml" />
+    <Content Include="Views\Publishers\Details.cshtml" />
+    <Content Include="Views\Publishers\Edit.cshtml" />
+    <Content Include="Views\Publishers\Index.cshtml" />
+    <Content Include="Views\Languages\Create.cshtml" />
+    <Content Include="Views\Languages\Delete.cshtml" />
+    <Content Include="Views\Languages\Details.cshtml" />
+    <Content Include="Views\Languages\Edit.cshtml" />
+    <Content Include="Views\Languages\Index.cshtml" />
+    <Content Include="Views\Books\Create.cshtml" />
+    <Content Include="Views\Books\Delete.cshtml" />
+    <Content Include="Views\Books\Details.cshtml" />
+    <Content Include="Views\Books\Edit.cshtml" />
+    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Home\AddUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -287,6 +341,23 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202406030222274_InitialCreate.resx">
+      <DependentUpon>202406030222274_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406030358451_InitialCreate1.resx">
+      <DependentUpon>202406030358451_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406030554209_ModifiedBooks.resx">
+      <DependentUpon>202406030554209_ModifiedBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406030601207_ModifiedBooks_Virtual.resx">
+      <DependentUpon>202406030601207_ModifiedBooks_Virtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406030822464_Modified_Application_User.resx">
+      <DependentUpon>202406030822464_Modified_Application_User.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -13,6 +13,13 @@ namespace LibraryMVC.Controllers
             return View();
         }
 
+        // GET: /Home/AddUser
+        [AllowAnonymous]
+        public ActionResult AddUser()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

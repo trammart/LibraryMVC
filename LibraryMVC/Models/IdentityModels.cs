@@ -12,20 +12,20 @@ namespace LibraryMVC.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [Required]
-        public string Name { get; set; }
-        public string StreetAddress { get; set; }
-        public string Village { get; set; }
-        public string District { get; set; }
-        public string City { get; set; }
+        //[Required]
+        //public string Name { get; set; }
+        //public string StreetAddress { get; set; }
+        //public string Village { get; set; }
+        //public string District { get; set; }
+        //public string City { get; set; }
 
-        public DateTime? Birth {  get; set; }
+        //public DateTime? Birth {  get; set; }
 
-        [Display(Name = "Ảnh đại diện")]
-        public string ImageUrl { get; set; }
+        //[Display(Name = "Ảnh đại diện")]
+        //public string ImageUrl { get; set; }
 
-        [NotMapped]
-        public string Role { get; set; }
+        //[NotMapped]
+        //public string Role { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -47,5 +47,11 @@ namespace LibraryMVC.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
     }
 }

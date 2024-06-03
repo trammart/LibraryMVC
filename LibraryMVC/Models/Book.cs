@@ -6,26 +6,7 @@ using System.Linq;
 
 namespace LibraryMVC.Models
 {
-    public class Book : DbContext
-    {
-        // Your context has been configured to use a 'Book' connection string from your application's 
-        // configuration file (App.config or Web.config). By default, this connection string targets the 
-        // 'LibraryMVC.Models.Book' database on your LocalDb instance. 
-        // 
-        // If you wish to target a different database and/or database provider, modify the 'Book' 
-        // connection string in the application configuration file.
-        public Book()
-            : base("name=Book")
-        {
-        }
-
-        // Add a DbSet for each entity type that you want to include in your model. For more information 
-        // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
-
-        public virtual DbSet<Books> Books { get; set; }
-    }
-
-    public class Books
+    public class Book
     {
         [Key]
         public int BookId { get; set; }
@@ -48,38 +29,46 @@ namespace LibraryMVC.Models
         [Required(ErrorMessage = "Category is required")]
         [DisplayName("Category")]
         public int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
 
         [Required]
         [DisplayName("Author")]
         public int AuthorId { get; set; }
+        public virtual Author Author { get; set; }
 
         [Required]
         [DisplayName("Language")]
         public int LanguageId { get; set; }
+        public virtual Language Language { get; set; }
+
 
         [Required]
         [DisplayName("Publisher")]
         public int PublisherId { get; set; }
+        public virtual Publisher Publisher { get; set; }
 
         [DisplayName("Publication Year")]
         public int PubYear { get; set; }
+
+        [Display(Name = "Image")]
+        public string ImageUrl { get; set; }
 
         [Display(Name = "Description")]
         [MaxLength(5000)]
         public string Description { get; set; }
 
 
-        [Required]
         [DisplayName("Created Date")]
         public DateTime? CreatedDate { get; set; }
 
-        [Required]
         [DisplayName("Updated Date")]
         public DateTime? UpdatedDate { get; set; }
 
         [Required]
         [DisplayName("Status")]
         public int Status { get; set; } = 1;
+
+        public string StatusText => Status == 1 ? "Active" : "Inactive";
 
     }
 }
