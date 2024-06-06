@@ -1,0 +1,179 @@
+﻿@model LibraryMVC.Models.BorrowingViewModel
+
+@{
+    ViewBag.Title = "Create Borrowing";
+}
+
+<h2>Create Borrowing</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Borrowing</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.Label("Member Phone", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="row mx-1">
+            <div class="col-md-7">
+                @Html.TextBoxFor(model => model.MemberPhone, new { @class = "form-control", @id = "MemberPhone" })
+                @Html.ValidationMessageFor(model => model.MemberPhone, "", new { @class = "text-danger" })
+            </div>
+            <button type="button" id="FetchMemberDetails" class="btn btn-info btn-sm">Details</button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Member Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.MemberName, new { @class = "form-control", @id = "MemberName", @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.HiddenFor(model => model.MemberId, new { @id = "MemberId" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Member Type", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.MemberTypeName, new { @class = "form-control", @id = "MemberTypeName", @readonly = "readonly" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Maximum Books</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.MaxBooks, new { @class = "form-control", @id = "MaxBooks", @readonly = "readonly" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.Label("Books", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @foreach (var book in Model.AvailableBooks)
+                {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="SelectedBooks" value="@book.BookId" /> @book.BookTitle
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>*@
+
+    <div id="BookList">
+        <div class="form-group">
+            <label class="control-label col-md-2">Books</label>
+            <div class="col-md-10">
+                <button type="button" id="AddBook" class="btn btn-success btn-sm"><i class="mdi mdi-library-plus"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group mt-3">
+        @Html.Label("Due Date", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.DueDate, new { @class = "form-control", @id = "DueDate", @readonly = "readonly" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#FetchMemberDetails').click(function () {
+                var phone = $('#MemberPhone').val();
+                if (phone === "") {
+                    alert("Please enter a phone number.");
+                    return;
+                }
+                $.ajax({
+                    url: '@Url.Action("GetMemberDetails", "Borrowings")',
+                    type: 'POST',
+                    data: { phone: phone },
+                    success: function (result) {
+                        if (result.success) {
+                            console.log(result);
+                            $('#MemberId').val(result.data.MemberId);
+                            $('#MemberName').val(result.data.MemberName);
+                            $('#MemberTypeName').val(result.data.MemberTypeName);
+                            $('#MaxBooks').val(result.data.MaxBooks);
+                            $('#MaxDays').val(result.data.MaxDays);
+
+                            // Calculate the due date
+                            var releaseDate = new Date();
+                            var dueDate = new Date();
+                            dueDate.setDate(releaseDate.getDate() + result.data.MaxDays);
+                            $('#DueDate').val(dueDate.toISOString().substring(0, 10)); // Format to YYYY-MM-DD
+                        } else {
+                            alert(result.message);
+                        }
+                    }
+                });
+            });
+            // Function to add a new book selection row
+        @*$('#AddBook').click(function () {
+            var bookRow = `
+                <div class="row mx-1 my-3">
+                    <select name="Books" class="form-control book-select col-5 mx-3">
+                        @foreach (var book in Model.AvailableBooks)
+                        {
+                            <option value="@book.BookId">@book.BookTitle</option>
+                        }
+                    </select>
+                    <input type="number" name="Count" class="form-control book-count col-3 mx-3" min="1" />
+                    <button type="button" class="btn btn-danger btn-sm remove-book mx-3"><i class="mdi mdi-delete"></i></button>
+                </div>`;
+            $('#BookList').append(bookRow);
+        });
+
+        // Function to remove a book selection row
+        $(document).on('click', '.remove-book', function () {
+            $(this).closest('.book-row').remove();
+        });*@
+        var bookIndex = 0;
+
+    $('#AddBook').click(function () {
+        var bookRow = `
+            <div class="row mx-1 my-3">
+                <select name="Books[${bookIndex}].BookId" class="form-control book-select col-5 mx-3">
+                    @foreach (var book in Model.AvailableBooks)
+                    {
+                        <option value="@book.BookId">@book.BookTitle</option>
+                    }
+                </select>
+                <input type="number" name="Books[${bookIndex}].Count" class="form-control book-count col-3 mx-3" min="1" />
+                <button type="button" class="btn btn-danger btn-sm remove-book mx-3"><i class="mdi mdi-delete"></i></button>
+            </div>`;
+        $('#BookList').append(bookRow);
+        bookIndex++;
+    });
+
+    $(document).on('click', '.remove-book', function () {
+        $(this).closest('.row').remove();
+        updateBookIndices();
+    });
+
+    function updateBookIndices() {
+        bookIndex = 0;
+        $('#BookList .row').each(function () {
+            $(this).find('.book-select').attr('name', `Books[${bookIndex}].BookId`);
+            $(this).find('.book-count').attr('name', `Books[${bookIndex}].Count`);
+            bookIndex++;
+        });
+    }
+        });
+</script>
+}

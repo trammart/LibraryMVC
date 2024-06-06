@@ -11,12 +11,14 @@ namespace LibraryMVC.Models
         [Display(Name = "Username")]
         [Required]
         public string UserName { get; set; }
-
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
         [Display(Name = "Email")]
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-
         [Display(Name = "Phone number")]
         [Phone]
         public string PhoneNumber { get; set; }
@@ -31,6 +33,5 @@ namespace LibraryMVC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-    
-}
+    }
 }

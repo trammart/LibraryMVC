@@ -4,21 +4,97 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Library Management</title>
-    <link type="image/png" sizes="48x48" rel="icon" href="~/Content/icon.png">
+    <link rel="shortcut icon" href="~/Content/favicon.png" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     @Styles.Render("~/Content/css")
+    <style>
+        .table.border th,
+        .table.border td {
+            vertical-align: middle;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 24px;
+            margin: 10px;
+        }
+
+            .toggle-switch .toggle-input {
+                display: none;
+            }
+
+            .toggle-switch .toggle-label {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 40px;
+                height: 24px;
+                background-color: #a2a6aa;
+                border-radius: 34px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .toggle-switch .toggle-label::before {
+                    content: "";
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    top: 2px;
+                    left: 2px;
+                    background-color: #fff;
+                    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+                    transition: transform 0.3s;
+                }
+
+            .toggle-switch .toggle-input:checked + .toggle-label {
+                background-color: #4CAF50;
+            }
+
+                .toggle-switch .toggle-input:checked + .toggle-label::before {
+                    transform: translateX(16px);
+                }
+
+            .toggle-switch.light .toggle-label {
+                background-color: #BEBEBE;
+            }
+
+            .toggle-switch.light .toggle-input:checked + .toggle-label {
+                background-color: #9B9B9B;
+            }
+
+                .toggle-switch.light .toggle-input:checked + .toggle-label::before {
+                    transform: translateX(6px);
+                }
+
+            .toggle-switch.dark .toggle-label {
+                background-color: #4B4B4B;
+            }
+
+            .toggle-switch.dark .toggle-input:checked + .toggle-label {
+                background-color: #717171;
+            }
+
+                .toggle-switch.dark .toggle-input:checked + .toggle-label::before {
+                    transform: translateX(16px);
+                }
+    </style>
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Library Management", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
+                @*<ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Authors", "Index", "Author", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Categories", "Index", "Categories", new { area = "" }, new { @class = "nav-link" })</li>
@@ -27,8 +103,8 @@
                     <li>@Html.ActionLink("Books", "Index", "Books", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-                 @Html.Partial("_LoginPartial")
+                </ul>*@
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </nav>
@@ -42,6 +118,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

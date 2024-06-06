@@ -12,6 +12,9 @@ namespace LibraryMVC.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         //[Required]
         //public string Name { get; set; }
         //public string StreetAddress { get; set; }
@@ -53,5 +56,10 @@ namespace LibraryMVC.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<MemberType> MemberTypes { get; set; }
+        public DbSet<Borrowing> Borrowing { get; set; }
+        public DbSet<BorrowDetail> BorrowDetail { get; set; }
+
     }
 }

@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewData["Title"] - Library Management</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Content/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/Content/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/Content/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="~/Content/vendors/ti-icons/css/themify-icons.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/Content/css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="~/Content/vendors/mdi/css/materialdesignicons.min.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/Content/favicon.png" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <style>
+        .table.border th,
+        .table.border td {
+            vertical-align: middle;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 24px;
+            margin: 10px;
+        }
+
+            .toggle-switch .toggle-input {
+                display: none;
+            }
+
+            .toggle-switch .toggle-label {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 40px;
+                height: 24px;
+                background-color: #a2a6aa;
+                border-radius: 34px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .toggle-switch .toggle-label::before {
+                    content: "";
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    top: 2px;
+                    left: 2px;
+                    background-color: #fff;
+                    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+                    transition: transform 0.3s;
+                }
+
+            .toggle-switch .toggle-input:checked + .toggle-label {
+                background-color: #4CAF50;
+            }
+
+                .toggle-switch .toggle-input:checked + .toggle-label::before {
+                    transform: translateX(16px);
+                }
+
+            .toggle-switch.light .toggle-label {
+                background-color: #BEBEBE;
+            }
+
+            .toggle-switch.light .toggle-input:checked + .toggle-label {
+                background-color: #9B9B9B;
+            }
+
+                .toggle-switch.light .toggle-input:checked + .toggle-label::before {
+                    transform: translateX(6px);
+                }
+
+            .toggle-switch.dark .toggle-label {
+                background-color: #4B4B4B;
+            }
+
+            .toggle-switch.dark .toggle-input:checked + .toggle-label {
+                background-color: #717171;
+            }
+
+                .toggle-switch.dark .toggle-input:checked + .toggle-label::before {
+                    transform: translateX(16px);
+                }
+
+        .swal2-modal .swal2-icon {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    <div class="container-scroller">
+        @Html.Partial("_TopBar")
+        <div class="container-fluid page-body-wrapper">
+            @Html.Partial("_ManageNav")
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+                    </div>
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!-- main-panel ends -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    @RenderSection("scripts", required: false)
+    <script src="../../Content/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../Content/vendors/chart.js/Chart.min.js"></script>
+    <script src="../../Content/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="../../Content/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script src="../../Content/js/dataTables.select.min.js"></script>
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../Content/js/off-canvas.js"></script>
+    <script src="../../Content/js/hoverable-collapse.js"></script>
+    <script src="../../Content/js/template.js"></script>
+    @*<script src="~Content/js/settings.js"></script>*@
+    @*<script src="~Content/js/todolist.js"></script>*@
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="../../Content/js/dashboard.js"></script>
+    @*<script src="~Content/js/Chart.roundedBarCharts.js"></script>*@
+</body>
+</html>
+
+

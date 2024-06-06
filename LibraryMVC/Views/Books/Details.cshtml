@@ -9,105 +9,114 @@
 <div>
     <h4>@Html.DisplayFor(model => model.BookTitle)</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.BookTitle)
-        </dt>
+    <div class="row">
+        <dl class="dl-horizontal col-md-6">
+            @*<dt>
+                    @Html.DisplayNameFor(model => model.BookTitle)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BookTitle)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.BookTitle)
+                </dd>*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Pages)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Pages)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Pages)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Pages)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Category.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorId)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.AuthorId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Author.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Author.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LanguageId)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.LanguageId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Language.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Language.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PublisherId)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.PublisherId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Publisher.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Publisher.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PubYear)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.PubYear)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PubYear)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.PubYear)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedDate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StatusText)
-        </dd>
-
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.StatusText)
+            </dd>
+        </dl>
+        <div class="col-md-6 text-center">
+            <img id="imagePreview"
+                 src="@(!string.IsNullOrEmpty(Model.ImageUrl) ? Url.Content(Model.ImageUrl) : "#")"
+                 alt="Image Preview"
+                 class="img-fluid"
+                 style="max-height: 500px; @(string.IsNullOrEmpty(Model.ImageUrl) ? "display: none;" : "")" />
+        </div>
+    </div>
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.BookId }) |
     @Html.ActionLink("Back to List", "Index")

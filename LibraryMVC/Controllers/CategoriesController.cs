@@ -10,6 +10,7 @@ using LibraryMVC.Models;
 
 namespace LibraryMVC.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -91,6 +92,41 @@ namespace LibraryMVC.Controllers
                 return RedirectToAction("Index");
             }
             return View(category);
+        }
+
+        [HttpPost]
+        public JsonResult ToggleStatus(int id)
+        {
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var category = db.Categories.Find(id);
+                    if (category == null)
+                    {
+                        return Json(new { success = false, message = "Category not found." });
+                    }
+
+                    int newStatus = category.Status == 1 ? 0 : 1;
+                    category.Status = newStatus;
+
+                    var books = db.Books.Where(b => b.CategoryId == id).ToList();
+                    foreach (var book in books)
+                    {
+                        book.Status = newStatus;
+                    }
+
+                    db.SaveChanges();
+                    transaction.Commit();
+
+                    return Json(new { success = true, status = category.Status });
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return Json(new { success = false, message = ex.Message });
+                }
+            }
         }
 
         // GET: Categories/Delete/5

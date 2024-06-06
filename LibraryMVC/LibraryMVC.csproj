@@ -173,11 +173,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\BorrowingsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\MemberTypesController.cs" />
     <Compile Include="Controllers\PublishersController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -201,18 +206,65 @@
     <Compile Include="Migrations\202406030822464_Modified_Application_User.designer.cs">
       <DependentUpon>202406030822464_Modified_Application_User.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406031326396_Add_Book_ImageUrl.cs" />
+    <Compile Include="Migrations\202406031326396_Add_Book_ImageUrl.designer.cs">
+      <DependentUpon>202406031326396_Add_Book_ImageUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406040129144_Add_RegisterUserModel.cs" />
+    <Compile Include="Migrations\202406040129144_Add_RegisterUserModel.designer.cs">
+      <DependentUpon>202406040129144_Add_RegisterUserModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406050906309_Add_Member_MemberType_BorrowDetail_Borrowing.cs" />
+    <Compile Include="Migrations\202406050906309_Add_Member_MemberType_BorrowDetail_Borrowing.designer.cs">
+      <DependentUpon>202406050906309_Add_Member_MemberType_BorrowDetail_Borrowing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406050910434_Modified_Type.cs" />
+    <Compile Include="Migrations\202406050910434_Modified_Type.designer.cs">
+      <DependentUpon>202406050910434_Modified_Type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406051354533_Modified_Member.cs" />
+    <Compile Include="Migrations\202406051354533_Modified_Member.designer.cs">
+      <DependentUpon>202406051354533_Modified_Member.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406051402241_Modified_Phone_Mem.cs" />
+    <Compile Include="Migrations\202406051402241_Modified_Phone_Mem.designer.cs">
+      <DependentUpon>202406051402241_Modified_Phone_Mem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406060125074_Modified_MemberTypes.cs" />
+    <Compile Include="Migrations\202406060125074_Modified_MemberTypes.designer.cs">
+      <DependentUpon>202406060125074_Modified_MemberTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202406060628133_Modified_ForeignKey.cs" />
+    <Compile Include="Migrations\202406060628133_Modified_ForeignKey.designer.cs">
+      <DependentUpon>202406060628133_Modified_ForeignKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AssignRoleViewModel.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\BorrowDetail.cs" />
+    <Compile Include="Models\BorrowDetailViewModel.cs" />
+    <Compile Include="Models\BorrowIndexViewModel.cs" />
+    <Compile Include="Models\Borrowing.cs" />
+    <Compile Include="Models\BorrowingViewModel.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ChangeUserPasswordViewModel.cs" />
+    <Compile Include="Models\DeleteRoleViewModel.cs" />
+    <Compile Include="Models\EditRoleViewModel.cs" />
+    <Compile Include="Models\EditUserViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Lang.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\MemberType.cs" />
     <Compile Include="Models\Publisher.cs" />
+    <Compile Include="Models\RegisterRoleViewModel.cs" />
     <Compile Include="Models\RegisterUserViewModel.cs" />
+    <Compile Include="Models\UserRoleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utility\SendEmail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -311,9 +363,37 @@
     <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
     <Content Include="Views\Home\AddUser.cshtml" />
+    <Content Include="Views\Home\UpdateUser.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_ManageNav.cshtml" />
+    <Content Include="Views\Shared\_CustomLayout.cshtml" />
+    <Content Include="Views\Shared\_TopBar.cshtml" />
+    <Content Include="Views\Role\AddRole.cshtml" />
+    <Content Include="Views\Role\UpdateRole.cshtml" />
+    <Content Include="Views\Role\DeleteRole.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\UserRole\Index.cshtml" />
+    <Content Include="Views\UserRole\AssignRole.cshtml" />
+    <Content Include="Views\MemberTypes\Create.cshtml" />
+    <Content Include="Views\MemberTypes\Delete.cshtml" />
+    <Content Include="Views\MemberTypes\Details.cshtml" />
+    <Content Include="Views\MemberTypes\Edit.cshtml" />
+    <Content Include="Views\MemberTypes\Index.cshtml" />
+    <Content Include="Views\Members\Create.cshtml" />
+    <Content Include="Views\Members\Delete.cshtml" />
+    <Content Include="Views\Members\Details.cshtml" />
+    <Content Include="Views\Members\Edit.cshtml" />
+    <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\Borrowings\Create.cshtml" />
+    <Content Include="Views\Borrowings\Delete.cshtml" />
+    <Content Include="Views\Borrowings\Details.cshtml" />
+    <Content Include="Views\Borrowings\Edit.cshtml" />
+    <Content Include="Views\Borrowings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Books\" />
+    <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -357,6 +437,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202406030822464_Modified_Application_User.resx">
       <DependentUpon>202406030822464_Modified_Application_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406031326396_Add_Book_ImageUrl.resx">
+      <DependentUpon>202406031326396_Add_Book_ImageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406040129144_Add_RegisterUserModel.resx">
+      <DependentUpon>202406040129144_Add_RegisterUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406050906309_Add_Member_MemberType_BorrowDetail_Borrowing.resx">
+      <DependentUpon>202406050906309_Add_Member_MemberType_BorrowDetail_Borrowing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406050910434_Modified_Type.resx">
+      <DependentUpon>202406050910434_Modified_Type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406051354533_Modified_Member.resx">
+      <DependentUpon>202406051354533_Modified_Member.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406051402241_Modified_Phone_Mem.resx">
+      <DependentUpon>202406051402241_Modified_Phone_Mem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406060125074_Modified_MemberTypes.resx">
+      <DependentUpon>202406060125074_Modified_MemberTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406060628133_Modified_ForeignKey.resx">
+      <DependentUpon>202406060628133_Modified_ForeignKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

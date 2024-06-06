@@ -1,0 +1,18 @@
+﻿@model LibraryMVC.Models.AssignRoleViewModel
+
+@{
+    ViewBag.Title = "Assign Role to User";
+}
+
+<h2>Assign Role to @Model.UserName</h2>
+
+@using (Html.BeginForm("AssignRole", "UserRole", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.UserId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SelectedRole, "Select Role")
+        @Html.DropDownListFor(model => model.SelectedRole, Model.RolesList, "Select a role", new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Assign Role</button>
+}

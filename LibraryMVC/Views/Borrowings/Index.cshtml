@@ -1,0 +1,84 @@
+﻿@model IEnumerable<LibraryMVC.Models.BorrowIndexViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberName)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.StaffName)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberName)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.StaffId)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                <div class="badge @(item.Status == 1 ? "badge-warning" : item.Status == 2 ? "badge-danger" : "badge-success")">
+                    @(item.Status == 1 ? "Borrowing" : item.Status == 2 ? "Out of date" : "Complete")
+                </div>
+
+            </td>
+            <td>
+                <button class="btn btn-sm @(item.Status == 1 ? "btn-success" : item.Status == 3 ? "badge-danger" : "btn-primary") update-status" data-id="@item.BorrowId">Update</button>
+                <button type="button" onclick="location.href='@Url.Action("Details", new { id = item.BorrowId })'" class="btn btn-warning btn-sm">Details</button>
+            </td>
+            @*<td>
+                <button type="button" onclick="location.href='@Url.Action("Update2", new { id = item.BorrowId })'" class="btn btn-primary btn-sm">Edit</button>
+                <button type="button" onclick="location.href='@Url.Action("Edit", new { id = item.BorrowId })'" class="btn btn-warning btn-sm">Details</button>
+            </td>*@
+        </tr>
+    }
+
+</table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(".update-status").click(function () {
+                var borrowId = $(this).data("id");
+                $.ajax({
+                    url: '@Url.Action("UpdateStatus", "Borrowing")',
+                    type: 'POST',
+                    data: { id: borrowId },
+                    success: function (result) {
+                        location.reload(); // Reload the page to see the changes
+                    },
+                    error: function (xhr, status, error) {
+                        alert("An error occurred while updating the status: " + error);
+                    }
+                });
+            });
+        });
+    </script>
+}

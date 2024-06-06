@@ -1,0 +1,75 @@
+﻿@model LibraryMVC.Models.BorrowingDetailViewModel
+
+@{
+    ViewBag.Title = "Borrowing Details";
+}
+
+<h2>Borrowing Details</h2>
+
+<div>
+    <h4>Borrowing</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Borrowing.BorrowId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Borrowing.BorrowId)
+        </dd>
+        @*<dt>
+            Member Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Borrowing.StaffId)
+        </dd>
+        <dt>
+            Staff Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Borrowing.StaffId)  Replace with Staff name if available 
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Borrowing.ReleaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Borrowing.ReleaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Borrowing.DueDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Borrowing.DueDate)
+        </dd>
+        @*<dt>
+            Status
+        </dt>
+        <dd>
+            <div class="badge @((model.Borrowing.Status == 1) ? "badge-warning" : (model.Borrowing.Status == 2) ? "badge-danger" : "badge-success")">
+                @(model.Borrowing.Status == 1 ? "Borrowing" : model.Borrowing.Status == 2 ? "Out of date" : "Complete")
+            </div>
+        </dd>*@
+    </dl>
+</div>
+
+<h4>Borrow Details</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.BorrowDetails)
+        {
+            <tr>
+                <td>@detail.BookId</td>
+                <td>@detail.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -10,6 +10,7 @@ using LibraryMVC.Models;
 
 namespace LibraryMVC.Controllers
 {
+    [Authorize]
     public class AuthorController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

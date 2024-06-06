@@ -1,0 +1,39 @@
+﻿@model IEnumerable<LibraryMVC.Models.UserRolesViewModel>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Users</h2>
+
+<table class="table">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+            <td>
+                @if (user.Roles != null && user.Roles.Any())
+                {
+                    foreach (var role in user.Roles)
+                    {
+                        @role <br />
+                    }
+                }
+                else
+                {
+                    @:Not Assigned
+                }
+            </td>
+            <td>
+                <button type="button" onclick="location.href='@Url.Action("Assign Role", "AssignRole", new { userId = user.UserId })'" class="btn btn-primary btn-sm">Edit</button>
+            </td>
+        </tr>
+    }
+</table>

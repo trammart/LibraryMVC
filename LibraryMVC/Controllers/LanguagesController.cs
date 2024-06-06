@@ -10,6 +10,7 @@ using LibraryMVC.Models;
 
 namespace LibraryMVC.Controllers
 {
+    [Authorize]
     public class LanguagesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

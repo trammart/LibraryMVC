@@ -2,50 +2,118 @@
 
 @{
     ViewBag.Title = "Index";
+    var vndCulture = new System.Globalization.CultureInfo("vi-VN");
 }
 
-<h2>Books List</h2>
+<div class="row px-3">
+    <h2 class="col">Books List</h2>
+    <button type="button" onclick="location.href='@Url.Action("Create")'" class="btn btn-success my-3 col-2">Create New</button>
+</div>
 
-<button type="button" onclick="location.href='@Url.Action("Create")'" class="btn btn-success my-3">Create New</button>
+<div class="card">
+    <div class="card-body">
+        <p class="card-title mb-2"></p>
+        <div class="table-responsive">
+            <table class="table table-striped border">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.BookTitle)</th>
+                    <th>@Html.DisplayNameFor(model => model.ImageUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.Price)</th>
+                    <th>@Html.DisplayNameFor(model => model.Category.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Author.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Publisher.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Status)</th>
+                    <th>Actions</th>
+                </tr>
 
-<table class="table border">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.BookTitle)</th>
-        <th>@Html.DisplayNameFor(model => model.Price)</th>
-        @*<th>@Html.DisplayNameFor(model => model.Pages)</th>*@
-        <th>@Html.DisplayNameFor(model => model.Category.Name)</th>
-        <th>@Html.DisplayNameFor(model => model.Author.Name)</th>
-        <th>@Html.DisplayNameFor(model => model.Language.Name)</th>
-        <th>@Html.DisplayNameFor(model => model.Publisher.Name)</th>
-        @*<th>@Html.DisplayNameFor(model => model.PubYear)</th>*@
-        @*<th>@Html.DisplayNameFor(model => model.Description)</th>
-        <th>@Html.DisplayNameFor(model => model.CreatedDate)</th>
-        <th>@Html.DisplayNameFor(model => model.UpdatedDate)</th>*@
-        <th>@Html.DisplayNameFor(model => model.Status)</th>
-        <th></th>
-    </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.BookTitle)</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.ImageUrl))
+                            {
+                                <img src="@Url.Content(item.ImageUrl)" alt="Book Image" style="max-height: 100px;" />
+                            }
+                        </td>
+                        <td>@string.Format(vndCulture, "{0:C0}", item.Price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Category.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Author.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Publisher.Name)</td>
+                        @*<td>@Html.DisplayFor(modelItem => item.StatusText)</td>*@
+                        <td>
+                            <div class="toggle-switch">
+                                <input class="toggle-input" id="toggle-@item.BookId" type="checkbox" @(item.Status == 1 ? "checked" : "") onclick="confirmToggleStatus(@item.BookId)">
+                                <label class="toggle-label" for="toggle-@item.BookId"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" onclick="location.href='@Url.Action("Edit", new { id = item.BookId })'" class="btn btn-primary btn-sm">Edit</button>
+                            <button type="button" onclick="location.href='@Url.Action("Details", new { id = item.BookId })'" class="btn btn-warning btn-sm">Details</button>
+                            @*<button type="button" onclick="location.href='@Url.Action("Delete", new { id = item.BookId })'" class="btn btn-danger">Delete</button>*@
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        function confirmToggleStatus(bookId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to change the status of this book?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, change it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    toggleStatus(bookId);
+                } else {
+                    // Revert the checkbox to its original state
+                    var checkbox = $('#toggle-' + bookId);
+                    checkbox.prop('checked', !checkbox.prop('checked'));
+                }
+            });
+        }
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.BookTitle)</td>
-            <td>@Html.DisplayFor(modelItem => item.Price)</td>
-            @*<td>@Html.DisplayFor(modelItem => item.Pages)</td>*@
-            <td>@Html.DisplayFor(modelItem => item.Category.Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Author.Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Language.Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Publisher.Name)</td>
-            @*<td>@Html.DisplayFor(modelItem => item.PubYear)</td>*@
-            @*<td>@Html.DisplayFor(modelItem => item.Description)</td>
-            <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
-            <td>@Html.DisplayFor(modelItem => item.UpdatedDate)</td>*@
-            <td>@Html.DisplayFor(modelItem => item.StatusText)</td>
-            <td>
-                <button type="button" onclick="location.href='@Url.Action("Edit", new { id=item.BookId })'" class="btn btn-primary">Edit</button>
-                <button type="button" onclick="location.href='@Url.Action("Details", new { id=item.CategoryId})'" class="btn btn-info">Details</button>
-                <button type="button" onclick="location.href='@Url.Action("Delete", new { id=item.BookId })'" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-    }
-</table>
-
+        function toggleStatus(bookId) {
+            $.ajax({
+                url: '@Url.Action("ToggleStatus", "Books")',
+                type: 'POST',
+                data: { id: bookId },
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire(
+                            'Updated!',
+                            'The status has been updated.',
+                            'success'
+                        );
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            response.message,
+                            'error'
+                        );
+                        // Revert the checkbox to its original state
+                        var checkbox = $('#toggle-' + bookId);
+                        checkbox.prop('checked', !checkbox.prop('checked'));
+                    }
+                },
+                error: function () {
+                    Swal.fire(
+                        'Error!',
+                        'There was an error updating the status.',
+                        'error'
+                    );
+                    // Revert the checkbox to its original state
+                    var checkbox = $('#toggle-' + bookId);
+                    checkbox.prop('checked', !checkbox.prop('checked'));
+                }
+            });
+        }
+    </script>
+}
